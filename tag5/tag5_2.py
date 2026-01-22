@@ -8,26 +8,23 @@ ranges = []
 
 
 def smalify(ranges):
-    trying = True
-    while trying:
-        for i in range(len(ranges)):
-            for j in range(len(ranges)):
-                if i == j:
-                    continue
-                if (ranges[j][0] <= ranges[i][1] and ranges[j][0] >= ranges[i][0]) or (
-                    ranges[j][1] >= ranges[i][0] and ranges[j][1] <= ranges[i][1]
-                ):
-                    print("merging", ranges[i], ranges[j])
-                    ranges[i][0] = min(ranges[j][0], ranges[i][0])
-                    ranges[i][1] = max(ranges[j][1], ranges[i][1])
-                    ranges.pop(j)
-                    break
-            else:
+    for i in range(len(ranges)):
+        for j in range(len(ranges)):
+            if i == j:
                 continue
-            break
-        trying = False
-        print("numranges", len(ranges))
-        return ranges
+            if (ranges[j][0] <= ranges[i][1] and ranges[j][0] >= ranges[i][0]) or (
+                ranges[j][1] >= ranges[i][0] and ranges[j][1] <= ranges[i][1]
+            ):
+                print("merging", ranges[i], ranges[j])
+                ranges[i][0] = min(ranges[j][0], ranges[i][0])
+                ranges[i][1] = max(ranges[j][1], ranges[i][1])
+                ranges.pop(j)
+                break
+        else:
+            continue
+        break
+    print("numranges", len(ranges))
+    return ranges
 
 
 with open("input.txt") as f:
